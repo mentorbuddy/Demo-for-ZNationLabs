@@ -45,3 +45,9 @@ Thumbs.db
 # Environment #
 ###############
 *.env
+
+# Folders #
+###############
+/__pycache__
+/migrations
+/instance
