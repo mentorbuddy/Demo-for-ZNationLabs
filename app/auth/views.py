@@ -35,10 +35,6 @@ def register():
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
-    """
-    Handle requests to the /login route
-    Log an mentee in through the login form
-    """
     form = LoginForm()
     if form.validate_on_submit():
 
@@ -50,8 +46,11 @@ def login():
             # log mentee in
             login_user(mentee)
 
-            # redirect to the dashboard page after login
-            return redirect(url_for('home.dashboard'))
+            # redirect to the appropriate dashboard page
+            if mentee.is_admin:
+                return redirect(url_for('home.admin_dashboard'))
+            else:
+                return redirect(url_for('home.dashboard'))
 
         # when login details are incorrect
         else:
